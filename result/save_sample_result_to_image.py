@@ -2,7 +2,8 @@ import numpy as np
 from PIL import Image
 import os
 
-result_file_name = "diffusion_step_100_loop_100000_samples_2x64x64x3/samples_2x64x64x3.npz"
+# sample产生的结果是npz类型的文件，这个脚本负责将npz文件转换成对应的图片文件
+result_file_name = "size_64_diffusion_step_100_logs_origin_image_linear_noise/samples_2x64x64x3_020000/samples_2x64x64x3_020000.npz"
 if __name__ == '__main__':
     result = np.load(result_file_name)
     result_file = result['arr_0']

@@ -1,14 +1,10 @@
 import cv2 as cv
 
 if __name__ == '__main__':
-    img = cv.imread('traffic/traffic.png')
-    # cv.imshow('Image', img)
-    # cv.waitKey(-1)
-    shrink_img = cv.resize(img, (512, 512), interpolation=cv.INTER_AREA)
-    height, width = img.shape[:2]
-    print(height, width)
-    cv.imshow('shrink_img', shrink_img)
-    shrink_img = cv.resize(shrink_img, (width, height), interpolation=cv.INTER_CUBIC)
-    cv.imshow('img', img)
-    cv.imshow('shrink_resize_img', shrink_img)
-    cv.waitKey(10000)
+    to_resize_image_path = 'attacked_image/8_img_att_fgsm.png'
+    to_resize_size = 256
+    to_save_resized_image_path = "attacked_image/resized_8_img_att_fgsm.png"
+
+    to_resize_image = cv.imread(to_resize_image_path)
+    resized_image = cv.resize(to_resize_image, (to_resize_size, to_resize_size), interpolation=cv.INTER_AREA)
+    cv.imwrite(to_save_resized_image_path, resized_image)
