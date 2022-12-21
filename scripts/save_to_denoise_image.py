@@ -102,7 +102,7 @@ def stamp_image_area(image_area, image, top_left_x, top_left_y, bottom_right_x, 
     return image
 
 
-def main(image, detect_results, save_path):
+def get_to_denoise_image(image, detect_results, save_path):
     if not os.path.exists(save_path):
         os.mkdir(save_path)
     # with image_area_log_file = open(save_path + 'image_area_log.txt', 'w')
@@ -111,6 +111,8 @@ def main(image, detect_results, save_path):
         final_top_left_x, final_top_left_y, final_bottom_right_x, final_bottom_right_y = \
             count_extract_area(top_left_x, top_left_y, bottom_right_x, bottom_right_y, image.shape[1], image.shape[0])
         to_merge_area_list.append([final_top_left_x, final_top_left_y, final_bottom_right_x, final_bottom_right_y])
+    # 输出中间结果（小图的坐标）
+    print(to_merge_area_list)
     merged_area_list = merge_image_area(to_merge_area_list, image.shape[1], image.shape[0])
     for i, (top_left_x, top_left_y, bottom_right_x, bottom_right_y,) in enumerate(merged_area_list):
         final_top_left_x, final_top_left_y, final_bottom_right_x, final_bottom_right_y = \
@@ -122,7 +124,7 @@ def main(image, detect_results, save_path):
 
 if __name__ == '__main__':
     # test case 1
-    # img = cv.imread('../datasets/attacked_image/2_img_att_fgsm.png')
+    img = cv.imread('../datasets/attacked_image/2_img_att_fgsm.png')
     # detect_results = [[110.4054, 206.4721, 128.9373, 217.0720, 1.0000, 1.0000, 0.0000],
     #                   [198.4990, 203.3287, 206.6206, 209.6069, 1.0000, 1.0000, 0.0000],
     #                   [209.0470, 199.1367, 219.6318, 209.0477, 1.0000, 1.0000, 0.0000],
@@ -150,10 +152,28 @@ if __name__ == '__main__':
     #                   [343.0685, 207.4971, 354.4904, 226.1065, 0.9996, 0.8183, 7.0000]]
 
     # test case 4
-    img = cv.imread('../datasets/attacked_image/26_img_att_fgsm.png')
-    detect_results = [[1.8492e+02, 2.0398e+02, 1.9364e+02, 2.0874e+02, 1.0000e+00, 1.0000e+00, 0.0000e+00],
-                      [2.1339e+02, 1.9762e+02, 2.4047e+02, 2.1570e+02, 1.0000e+00, 6.0951e-01, 1.0000e+00],
-                      [2.1395e+02, 1.9673e+02, 2.4036e+02, 2.1489e+02, 9.9999e-01, 9.6155e-01, 2.0000e+00],
-                      [2.1204e+02, 1.9699e+02, 2.4058e+02, 2.1615e+02, 1.0000e+00, 3.3577e-02, 5.0000e+00]]
+    # img = cv.imread('../datasets/attacked_image/26_img_att_fgsm.png')
+    # detect_results = [[1.8492e+02, 2.0398e+02, 1.9364e+02, 2.0874e+02, 1.0000e+00, 1.0000e+00, 0.0000e+00],
+    #                   [2.1339e+02, 1.9762e+02, 2.4047e+02, 2.1570e+02, 1.0000e+00, 6.0951e-01, 1.0000e+00],
+    #                   [2.1395e+02, 1.9673e+02, 2.4036e+02, 2.1489e+02, 9.9999e-01, 9.6155e-01, 2.0000e+00],
+    #                   [2.1204e+02, 1.9699e+02, 2.4058e+02, 2.1615e+02, 1.0000e+00, 3.3577e-02, 5.0000e+00]]
 
-    main(img, detect_results, "tmp/" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")) + "/")
+    # get_to_denoise_image(img, detect_results, "tmp/" + str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")) + "/")
+
+
+
+    # img_area = cv.imread('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_0_linear_noise/samples_5x32x32x3_100000/1_selected.png')
+    # img = stamp_image_area(img_area, img, 103, 195, 134, 226)
+    # cv.imwrite('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_0_linear_noise/samples_5x32x32x3_100000/denoise_image_area_0_attacked_image.png', img)
+
+    # img_area = cv.imread('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_1_linear_noise/samples_5x32x32x3_100000/0_selected.png')
+    # img = stamp_image_area(img_area, img, 186, 190, 217, 221)
+    # cv.imwrite('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_1_linear_noise/samples_5x32x32x3_100000/denoise_image_area_1_attacked_image.png', img)
+
+    img_area = cv.imread('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_2_linear_noise/samples_5x32x32x3_100000/1_selected.png')
+    img = stamp_image_area(img_area, img, 198, 188, 229, 219)
+    cv.imwrite('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_2_linear_noise/samples_5x32x32x3_100000/denoise_image_area_2_attacked_image.png', img)
+
+    img_area = cv.imread('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_3_linear_noise/samples_5x32x32x3_100000/0_selected.png')
+    img = stamp_image_area(img_area, img, 114, 191, 145, 222)
+    cv.imwrite('../result/size_32_diffusion_step_100_logs_attacked_detect_area_image_3_linear_noise/samples_5x32x32x3_100000/denoise_image_area_3_attacked_image.png', img)
