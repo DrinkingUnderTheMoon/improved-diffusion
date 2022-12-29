@@ -1,10 +1,11 @@
 import cv2 as cv
 
 if __name__ == '__main__':
-    to_resize_image_path = '../result/size_256_diffusion_step_100_logs_resize_attacked_image_cosine_noise/samples_5x256x256x3_080000/2.png'
-    to_resize_size = 417
-    to_save_resized_image_path = "../result/size_256_diffusion_step_100_logs_resize_attacked_image_cosine_noise/resize_080000/2.png"
+    to_resize_image_path = '../scripts/tmp/2_img_att_pgd/2.png'
+    to_resize_size_x = 256
+    to_resize_size_y = 256
+    to_save_resized_image_path = "attacked_image/resize_2_img_att_pgd_detect_area_image_2.png"
 
     to_resize_image = cv.imread(to_resize_image_path)
-    resized_image = cv.resize(to_resize_image, (to_resize_size, to_resize_size), interpolation=cv.INTER_AREA)
+    resized_image = cv.resize(to_resize_image, (to_resize_size_x, to_resize_size_y), interpolation=cv.INTER_AREA)
     cv.imwrite(to_save_resized_image_path, resized_image)

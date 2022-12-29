@@ -3,7 +3,7 @@ from PIL import Image
 import os
 
 # sample产生的结果是npz类型的文件，这个脚本负责将npz文件转换成对应的图片文件
-result_file_name = "size_256_diffusion_step_4000_logs_resize_attacked_image_cosine_noise/samples_5x256x256x3_100000.npz"
+result_file_name = "beta_size_256_diffusion_step_100_logs_resize_attacked_image_linear_noise/samples_5x256x256x3_100000.npz"
 if __name__ == '__main__':
     result = np.load(result_file_name)
     result_file = result['arr_0']
